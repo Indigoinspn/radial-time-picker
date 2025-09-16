@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --config webpack.config.cjs",
     "build": "webpack --config webpack.config.cjs",
-    "predeploy": "npm run build && echo \"\" > dist/.nojekyll",
-    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "git add docs && git commit -m \"Deploy to docs\" && git push",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css}\""

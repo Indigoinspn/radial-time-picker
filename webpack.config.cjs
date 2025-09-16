@@ -5,9 +5,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, 'docs'),
-    filename: 'bundle.[contenthash].js',
-    publicPath: '/',
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js',
+    publicPath: process.env.NODE_ENV === 'production' ? '/radial-time-picker/' : '/',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],

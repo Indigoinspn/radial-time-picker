@@ -2,23 +2,23 @@ import { COLORS } from 'shared/ui/theme/colors';
 import styled from 'styled-components';
 import { ACTIVE_POINT_RADIUS, INACTIVE_POINT_RADIUS } from 'widgets/RadialTimePicker/model/constants';
 
-export const StyledCircle = styled.circle<{ $isActive: boolean }>`
+export const ClickableCircle = styled.circle`
   cursor: pointer;
+  r: 30;
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 2px;
+`;
+
+export const StyledCircle = styled.circle<{ $isActive: boolean }>`
+  pointer-events: none;
   r: ${props => (props.$isActive ? ACTIVE_POINT_RADIUS : INACTIVE_POINT_RADIUS)};
   fill: ${props => (props.$isActive ? COLORS.light : COLORS.darkBlue)};
   stroke: ${props => (props.$isActive ? COLORS.lightGrey : COLORS.darkBlue)};
   stroke-width: 2px;
   transition:
     fill 0.5s linear,
-    r 0.3s ease-in-out,
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
-
-  &:hover {
-    r: ${ACTIVE_POINT_RADIUS};
-    fill: ${COLORS.light};
-    stroke: ${COLORS.lightGrey};
-  }
+    r 0.3s ease-in-out;
 `;
 
 export const PeriodNumber = styled.text<{ $isVisible: boolean }>`

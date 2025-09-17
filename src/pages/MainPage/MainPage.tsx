@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RadialTimePicker } from 'widgets/RadialTimePicker';
 import { Background, Layout, Lines, LinesContainer } from './styles';
-import { backgroundBlockWidth } from 'widgets/RadialTimePicker/model/constants';
+import { StubPage } from '../StubPage';
 
 export const MainPage = () => {
   const [viewportWidth, setViewportWidth] = useState<number>(window.innerWidth);
@@ -20,20 +20,24 @@ export const MainPage = () => {
   }, []);
 
   useEffect(() => {
-    setLinesQuantity(Math.floor(viewportWidth / 80));
+    setLinesQuantity(Math.floor(1920 / 80));
   }, [viewportWidth]);
 
   return (
-    <Background>
-      <LinesContainer>
-        {Array.from({ length: linesQuantity + 1 }, (_, i) => (
-          <Lines key={i + 1} />
-        ))}
-      </LinesContainer>
+    <>
+      <Background>
+        <LinesContainer>
+          {Array.from({ length: linesQuantity + 1 }, (_, i) => (
+            <Lines key={i + 1} />
+          ))}
+        </LinesContainer>
 
-      <Layout>
-        <RadialTimePicker pointsQuantity={6} initialActiveIndex={0} />
-      </Layout>
-    </Background>
+        <Layout>
+          <RadialTimePicker pointsQuantity={6} initialActiveIndex={0} />
+        </Layout>
+      </Background>
+
+      <StubPage />
+    </>
   );
 };

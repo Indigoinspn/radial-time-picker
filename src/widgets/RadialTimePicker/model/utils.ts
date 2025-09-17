@@ -6,12 +6,10 @@ export const generateYearSequence = (from: number, to: number, isForward: boolea
   const years: number[] = [];
 
   if (isForward) {
-    // Вперёд: от from до to (включительно)
     for (let i = from; i <= to; i++) {
       years.push(i);
     }
   } else {
-    // Назад: от from до to (включительно), в обратном порядке
     for (let i = from; i >= to; i--) {
       years.push(i);
     }

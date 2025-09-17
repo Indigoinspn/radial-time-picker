@@ -5,7 +5,6 @@ export const Row = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  /* border: 1px solid blue; */
 `;
 
 export const Column = styled.div`
@@ -17,5 +16,4 @@ export const Column = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: stretch;
-  /* border: 1px solid orange; */
 `;

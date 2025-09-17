@@ -3,25 +3,22 @@ import styled, { css } from 'styled-components';
 
 export const TimelineContainer = styled.div`
   position: relative;
-  width: 1400px;
-  /* height: 240px; */
-  margin-top: 36px;
-  /* margin-bottom: 50px; */
+  width: 100%;
+  margin-top: 56px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
   padding: 0 78px;
-  /* border: 1px solid green; */
 `;
 
-export const EventsContainer = styled.div`
-  width: 1244px;
-  /* height: 200px; */
+export const EventsContainer = styled.div<{ $isVisible: boolean }>`
+  width: 1280px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* border: 1px solid red; */
+  opacity: ${props => (props.$isVisible ? 1 : 0)};
+  transition: opacity 0.4s ease-out;
 `;
 
 export type Position = 'Left' | 'Right';

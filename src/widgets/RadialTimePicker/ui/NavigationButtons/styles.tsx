@@ -45,4 +45,5 @@ export const Container = styled.div`
   width: 431px;
   height: 88px;
   padding-left: 78px;
+  z-index: 3;
 `;

@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { CENTER, DIAL_RADIUS, PERIODS } from 'widgets/RadialTimePicker/model/constants';
-import { ActivePointIndex, ValidPointsQuantity } from 'widgets/RadialTimePicker/model/types';
-import { StyledCircle, PeriodLabel, PeriodNumber } from './styles';
+import { CENTER_X, CENTER_Y, DIAL_RADIUS, PERIODS } from 'widgets/RadialTimePicker/model/constants';
+import { ActivePointIndex, PointDisplayProps, PointInteractionProps, RotatableProps } from 'widgets/RadialTimePicker/model/types';
+import { StyledCircle, PeriodLabel, PeriodNumber, ClickableCircle } from './styles';
 
-interface PointsProps {
-  pointsQuantity: ValidPointsQuantity;
-  rotation: number;
-  activePointIndex: ActivePointIndex;
-  onPointClick: (index: ActivePointIndex) => void;
-}
+interface PointsProps extends PointDisplayProps, RotatableProps, PointInteractionProps {}
 
 export const Points = ({ activePointIndex, onPointClick, pointsQuantity, rotation }: PointsProps) => {
   const pointsArray = Array.from({ length: pointsQuantity }, (_, i) => i);
@@ -33,21 +28,20 @@ export const Points = ({ activePointIndex, onPointClick, pointsQuantity, rotatio
         const isActive = i === activePointIndex;
         const angle = i * (360 / pointsQuantity);
         const radians = (angle * Math.PI) / 180;
-        const x = CENTER + DIAL_RADIUS * Math.cos(radians);
-        const y = CENTER + DIAL_RADIUS * Math.sin(radians);
+        const x = CENTER_X + DIAL_RADIUS * Math.cos(radians);
+        const y = CENTER_Y + DIAL_RADIUS * Math.sin(radians);
 
         return (
           <>
-            <StyledCircle
+            <ClickableCircle
               cx={x}
               cy={y}
-              key={i}
+              key={i + pointsQuantity}
               onClick={() => onPointClick(i as ActivePointIndex)}
-              $isActive={isActive}
               onMouseEnter={() => setHoveredPointIndex(i)}
               onMouseLeave={() => setHoveredPointIndex(null)}
             />
-
+            <StyledCircle cx={x} cy={y} key={i} $isActive={isActive || hoveredPointIndex === i} />
             <g transform={`rotate(${-rotation} ${x} ${y})`}>
               <PeriodNumber y={y + 5} x={x - 6} $isVisible={isActive || hoveredPointIndex === i}>
                 {i + 1}

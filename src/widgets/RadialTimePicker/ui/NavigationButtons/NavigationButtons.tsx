@@ -1,16 +1,9 @@
 import React from 'react';
-import { ActivePointIndex, ValidPointsQuantity } from 'widgets/RadialTimePicker/model/types';
+import { NavigationProps, PointDisplayProps } from 'widgets/RadialTimePicker/model/types';
 import { CounterDisplay } from '../CounterDisplay';
 import { Button, ButtonContainer, Container } from './styles';
 
-interface NavigationButtonsProps {
-  onPrev: () => void;
-  onNext: () => void;
-  canPrev: boolean;
-  canNext: boolean;
-  pointsQuantity: ValidPointsQuantity;
-  activePointIndex: ActivePointIndex;
-}
+interface NavigationButtonsProps extends NavigationProps, PointDisplayProps {}
 
 export const NavigationButtons: React.FC<NavigationButtonsProps> = ({
   activePointIndex,

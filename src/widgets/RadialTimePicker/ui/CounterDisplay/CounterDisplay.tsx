@@ -1,11 +1,8 @@
 import React from 'react';
-import { ValidPointsQuantity } from 'widgets/RadialTimePicker/model/types';
+import { PaginationProps } from 'widgets/RadialTimePicker/model/types';
 import { StyledSpan } from './styles';
 
-interface CounterDisplayProps {
-  totalItems: ValidPointsQuantity;
-  currentItem: number;
-}
+interface CounterDisplayProps extends PaginationProps {}
 
 export const CounterDisplay: React.FC<CounterDisplayProps> = ({ currentItem, totalItems }) => {
   return (

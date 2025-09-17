@@ -2,11 +2,14 @@ import { Period } from './types';
 
 export const backgroundBlockWidth = 80;
 
-export const SVG_SIZE = 630;
+export const SVG_WIDTH = 1458;
+export const SVG_HEIGHT = 630;
 
 export const BASE_CIRCLE_DIAMETER = 530;
-export const BASE_CIRCLE_RADIUS = BASE_CIRCLE_DIAMETER / 2; //265
-export const CENTER = SVG_SIZE / 2; //295
+export const BASE_CIRCLE_RADIUS = BASE_CIRCLE_DIAMETER / 2;
+export const CENTER = SVG_HEIGHT / 2;
+export const CENTER_Y = SVG_HEIGHT / 2;
+export const CENTER_X = SVG_WIDTH / 2;
 
 export const DIAL_RADIUS = BASE_CIRCLE_RADIUS;
 
@@ -28,7 +31,6 @@ export const PERIODS: Period[] = [
     ],
     id: 1,
     name: 'Искусство',
-    //years: '1980-1986',
     startYear: 1980,
     endYear: 1986,
   },
@@ -42,7 +44,6 @@ export const PERIODS: Period[] = [
     ],
     id: 2,
     name: 'Кино',
-    //years: '1987-1991',
     startYear: 1987,
     endYear: 1991,
   },
@@ -57,7 +58,6 @@ export const PERIODS: Period[] = [
     ],
     id: 3,
     name: 'Литература',
-    //years: '1992-1997',
     startYear: 1992,
     endYear: 1997,
   },
@@ -74,7 +74,6 @@ export const PERIODS: Period[] = [
     ],
     id: 4,
     name: 'Архитектура',
-    //years: '1998-2005',
     startYear: 1998,
     endYear: 2005,
   },
@@ -90,7 +89,6 @@ export const PERIODS: Period[] = [
     ],
     id: 5,
     name: 'Музыка',
-    //years: '2006-2014',
     startYear: 2006,
     endYear: 2014,
   },
@@ -105,7 +103,6 @@ export const PERIODS: Period[] = [
     ],
     id: 6,
     name: 'Наука',
-    //years: '2015-2022',
     startYear: 2015,
     endYear: 2022,
   },

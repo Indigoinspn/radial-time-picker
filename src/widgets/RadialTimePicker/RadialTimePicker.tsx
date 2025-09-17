@@ -40,7 +40,6 @@ export const RadialTimePicker: React.FC<RadialTimePickerProps> = ({ initialActiv
     }
   };
 
-  // Сохраняем предыдущий индекс ПЕРЕД обновлением
   useEffect(() => {
     return () => {
       prevActivePointIndexRef.current = activePointIndex;
@@ -71,9 +70,8 @@ export const RadialTimePicker: React.FC<RadialTimePickerProps> = ({ initialActiv
           prevActivePointIndex={prevActivePointIndexRef.current}
         />
       </Row>
-      {/* <Row> */}
+
       <TimelineEvents activePointIndex={activePointIndex} />
-      {/* </Row> */}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { PERIODS } from 'widgets/RadialTimePicker/model/constants';
-import { ActivePointIndex } from 'widgets/RadialTimePicker/model/types';
+import { ActivePointIndex, PointDisplayProps } from 'widgets/RadialTimePicker/model/types';
 import { TimelineEvent } from '../TimelineEvent';
 import { EventsContainer, TimelineButton, TimelineContainer } from './styles';
 
@@ -9,20 +9,20 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-interface EventSwiperProps {
-  activePointIndex: ActivePointIndex;
-}
+interface TimelineEventsProps extends Pick<PointDisplayProps, 'activePointIndex'> {}
 
-export const TimelineEvents: React.FC<EventSwiperProps> = ({ activePointIndex }) => {
+export const TimelineEvents: React.FC<TimelineEventsProps> = ({ activePointIndex }) => {
   const [isBeginning, setIsBeginning] = React.useState(true);
   const [isEnd, setIsEnd] = React.useState(false);
+
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [eventsList, setEventsList] = React.useState(PERIODS[0].events);
 
   const getActivePeriodId = (index: ActivePointIndex): number => {
     return index + 1;
   };
 
   const period = PERIODS.find(item => item.id === getActivePeriodId(activePointIndex));
-  const eventsList = period?.events || PERIODS[0].events;
 
   const swiperRef = React.useRef<any>(null);
 
@@ -30,6 +30,20 @@ export const TimelineEvents: React.FC<EventSwiperProps> = ({ activePointIndex })
     if (swiperRef.current) {
       swiperRef.current.slideTo(0, 300);
     }
+
+    setIsVisible(false);
+    const showTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 600);
+
+    const eventsTimer = setTimeout(() => {
+      setEventsList(period?.events || PERIODS[0].events);
+    }, 500);
+
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(eventsTimer);
+    };
   }, [activePointIndex]);
 
   return (
@@ -40,7 +54,7 @@ export const TimelineEvents: React.FC<EventSwiperProps> = ({ activePointIndex })
         </svg>
       </TimelineButton>
 
-      <EventsContainer>
+      <EventsContainer $isVisible={isVisible}>
         <Swiper
           modules={[Navigation]}
           spaceBetween={80}

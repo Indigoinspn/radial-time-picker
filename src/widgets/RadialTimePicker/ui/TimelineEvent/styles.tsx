@@ -3,7 +3,6 @@ import { theme } from 'shared/ui/theme/theme';
 import styled from 'styled-components';
 
 export const EventContainer = styled.div`
-  /* border: 1px solid blue; */
   width: 320px;
   height: 125px;
 `;

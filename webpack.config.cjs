@@ -2,12 +2,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = {
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+    publicPath: isProduction ? './' : '/',
+    clean: true,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
@@ -36,10 +39,11 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',
+      publicPath: isProduction ? './' : '/',
+      scriptLoading: 'defer',
     }),
   ],
   devServer: {
@@ -51,5 +55,5 @@ module.exports = {
     open: true,
     hot: true,
   },
-  mode: 'development',
+  mode: isProduction ? 'production' : 'development',
 };

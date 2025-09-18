@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { PERIODS } from './model/constants';
 import { ActivePointIndex, ValidPointsQuantity } from './model/types';
 import { useRadialAnimation } from './model/useRadialAnimation';
-import { Column, Row } from './styles';
+import { Column, DialContainer } from './styles';
 import { Dial } from './ui/Dial';
 import { NavigationButtons } from './ui/NavigationButtons';
 import { TimelineEvents } from './ui/TimelineEvents';
@@ -48,7 +48,7 @@ export const RadialTimePicker: React.FC<RadialTimePickerProps> = ({ initialActiv
 
   return (
     <>
-      <Row>
+      <DialContainer>
         <Column>
           <Title />
 
@@ -69,7 +69,7 @@ export const RadialTimePicker: React.FC<RadialTimePickerProps> = ({ initialActiv
           onPointClick={handlePointClick}
           prevActivePointIndex={prevActivePointIndexRef.current}
         />
-      </Row>
+      </DialContainer>
 
       <TimelineEvents activePointIndex={activePointIndex} />
     </>

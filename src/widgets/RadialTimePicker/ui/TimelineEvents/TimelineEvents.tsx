@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { PERIODS } from 'widgets/RadialTimePicker/model/constants';
 import { ActivePointIndex, PointDisplayProps } from 'widgets/RadialTimePicker/model/types';
 import { TimelineEvent } from '../TimelineEvent';
-import { EventsContainer, TimelineButton, TimelineContainer } from './styles';
+import { EventsContainer, PeriodLabelMobile, StyledHorizontalLine, TimelineButton, TimelineContainer } from './styles';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
@@ -14,6 +14,7 @@ interface TimelineEventsProps extends Pick<PointDisplayProps, 'activePointIndex'
 export const TimelineEvents: React.FC<TimelineEventsProps> = ({ activePointIndex }) => {
   const [isBeginning, setIsBeginning] = React.useState(true);
   const [isEnd, setIsEnd] = React.useState(false);
+  const [activeSlideIndex, setActiveSlideIndex] = React.useState(0);
 
   const [isVisible, setIsVisible] = React.useState(false);
   const [eventsList, setEventsList] = React.useState(PERIODS[0].events);
@@ -48,6 +49,8 @@ export const TimelineEvents: React.FC<TimelineEventsProps> = ({ activePointIndex
 
   return (
     <TimelineContainer>
+      <PeriodLabelMobile $isVisible={isVisible}>{PERIODS[activeSlideIndex].name}</PeriodLabelMobile>
+      <StyledHorizontalLine />
       <TimelineButton $position={'Left'} onClick={() => swiperRef.current?.slidePrev()} disabled={isBeginning}>
         <svg viewBox="0 0 24 24">
           <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
@@ -57,7 +60,6 @@ export const TimelineEvents: React.FC<TimelineEventsProps> = ({ activePointIndex
       <EventsContainer $isVisible={isVisible}>
         <Swiper
           modules={[Navigation]}
-          spaceBetween={80}
           slidesPerView="auto"
           onSwiper={swiper => (swiperRef.current = swiper)}
           navigation={false}
@@ -65,14 +67,17 @@ export const TimelineEvents: React.FC<TimelineEventsProps> = ({ activePointIndex
           centeredSlides={false}
           freeMode={true}
           watchSlidesProgress={true}
+          onActiveIndexChange={swiper => {
+            setActiveSlideIndex(swiper.activeIndex);
+          }}
           onSlideChange={swiper => {
             setIsBeginning(swiper.isBeginning);
             setIsEnd(swiper.isEnd);
           }}
         >
-          {eventsList.map(item => (
+          {eventsList.map((item, index) => (
             <SwiperSlide key={item.year} style={{ width: 'auto' }}>
-              <TimelineEvent year={item.year} description={item.description} />
+              <TimelineEvent year={item.year} description={item.description} isActive={index === activeSlideIndex} />
             </SwiperSlide>
           ))}
         </Swiper>

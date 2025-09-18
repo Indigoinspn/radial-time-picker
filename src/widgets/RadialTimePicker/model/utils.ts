@@ -17,3 +17,5 @@ export const generateYearSequence = (from: number, to: number, isForward: boolea
 
   return years;
 };
+
+export const createArray = (length: number) => Array.from({ length }, (_, i) => i);

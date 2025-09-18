@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { CENTER_X, CENTER_Y, DIAL_RADIUS, PERIODS } from 'widgets/RadialTimePicker/model/constants';
 import { ActivePointIndex, PointDisplayProps, PointInteractionProps, RotatableProps } from 'widgets/RadialTimePicker/model/types';
 import { StyledCircle, PeriodLabel, PeriodNumber, ClickableCircle } from './styles';
+import { createArray } from 'widgets/RadialTimePicker/model/utils';
 
 interface PointsProps extends PointDisplayProps, RotatableProps, PointInteractionProps {}
 
 export const Points = ({ activePointIndex, onPointClick, pointsQuantity, rotation }: PointsProps) => {
-  const pointsArray = Array.from({ length: pointsQuantity }, (_, i) => i);
+  const pointsArray = createArray(pointsQuantity);
   const [hoveredPointIndex, setHoveredPointIndex] = useState<number | null>(null);
   const [isLabelVisible, setIsLabelVisible] = useState(true);
 

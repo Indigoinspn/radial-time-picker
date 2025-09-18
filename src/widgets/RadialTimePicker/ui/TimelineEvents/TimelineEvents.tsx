@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PERIODS } from 'widgets/RadialTimePicker/model/constants';
 import { ActivePointIndex, PointDisplayProps } from 'widgets/RadialTimePicker/model/types';
 import { TimelineEvent } from '../TimelineEvent';
@@ -12,12 +12,13 @@ import 'swiper/css/navigation';
 interface TimelineEventsProps extends Pick<PointDisplayProps, 'activePointIndex'> {}
 
 export const TimelineEvents: React.FC<TimelineEventsProps> = ({ activePointIndex }) => {
-  const [isBeginning, setIsBeginning] = React.useState(true);
-  const [isEnd, setIsEnd] = React.useState(false);
-  const [activeSlideIndex, setActiveSlideIndex] = React.useState(0);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [activePeriodLabel, setActivePeriodLabel] = useState(PERIODS[0].name);
 
-  const [isVisible, setIsVisible] = React.useState(false);
-  const [eventsList, setEventsList] = React.useState(PERIODS[0].events);
+  const [isVisible, setIsVisible] = useState(false);
+  const [eventsList, setEventsList] = useState(PERIODS[0].events);
 
   const getActivePeriodId = (index: ActivePointIndex): number => {
     return index + 1;
@@ -39,6 +40,7 @@ export const TimelineEvents: React.FC<TimelineEventsProps> = ({ activePointIndex
 
     const eventsTimer = setTimeout(() => {
       setEventsList(period?.events || PERIODS[0].events);
+      setActivePeriodLabel(PERIODS[activePointIndex].name);
     }, 500);
 
     return () => {
@@ -49,7 +51,7 @@ export const TimelineEvents: React.FC<TimelineEventsProps> = ({ activePointIndex
 
   return (
     <TimelineContainer>
-      <PeriodLabelMobile $isVisible={isVisible}>{PERIODS[activeSlideIndex].name}</PeriodLabelMobile>
+      <PeriodLabelMobile $isVisible={isVisible}>{activePeriodLabel}</PeriodLabelMobile>
       <StyledHorizontalLine />
       <TimelineButton $position={'Left'} onClick={() => swiperRef.current?.slidePrev()} disabled={isBeginning}>
         <svg viewBox="0 0 24 24">
